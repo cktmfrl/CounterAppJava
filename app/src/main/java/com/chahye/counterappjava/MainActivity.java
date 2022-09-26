@@ -1,7 +1,7 @@
 package com.chahye.counterappjava;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -9,29 +9,17 @@ import android.os.Bundle;
 import com.chahye.counterappjava.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    private ActivityMainBinding binding;
-    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        ActivityMainBinding binding =  DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        viewModel.countLiveData.observe(this, count -> {
-            binding.countTextView.setText(String.valueOf(count));
-        });
-
-        binding.addButton.setOnClickListener(v -> {
-            viewModel.increaseCount();
-        });
-
-        binding.subButton.setOnClickListener(v -> {
-            viewModel.decreaseCount();
-        });
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
     }
 
 }

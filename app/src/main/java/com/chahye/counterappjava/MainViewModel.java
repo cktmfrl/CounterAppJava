@@ -1,5 +1,6 @@
 package com.chahye.counterappjava;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
@@ -17,6 +18,10 @@ public class MainViewModel extends ViewModel {
             handle = savedStateHandle;
             count = savedStateHandle.get("count") == null ? 0 : savedStateHandle.get("count");
         }
+    }
+
+    public LiveData<Integer> getCountLiveData() {
+        return countLiveData;
     }
 
     private void setCount(int value) {
