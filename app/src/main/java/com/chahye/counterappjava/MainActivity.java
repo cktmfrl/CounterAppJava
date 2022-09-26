@@ -1,6 +1,7 @@
 package com.chahye.counterappjava;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 
@@ -9,8 +10,6 @@ import com.chahye.counterappjava.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
-    private int count = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,16 +17,17 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.countTextView.setText(String.valueOf(count));
+        MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        binding.countTextView.setText(String.valueOf(viewModel.count));
 
         binding.addButton.setOnClickListener(v -> {
-            count++;
-            binding.countTextView.setText(String.valueOf(count));
+            viewModel.count++;
+            binding.countTextView.setText(String.valueOf(viewModel.count));
         });
 
         binding.subButton.setOnClickListener(v -> {
-            count--;
-            binding.countTextView.setText(String.valueOf(count));
+            viewModel.count--;
+            binding.countTextView.setText(String.valueOf(viewModel.count));
         });
     }
 }
