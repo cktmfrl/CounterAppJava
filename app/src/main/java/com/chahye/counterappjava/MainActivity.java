@@ -34,17 +34,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // 시스템에 의한 종료 시 UI 상태 유지
-//    @Override
-//    protected void onSaveInstanceState(@NonNull Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putInt("count", viewModel.count);
-//    }
-//
-//    @Override
-//    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//        viewModel.count = savedInstanceState.getInt("count");
-//    }
-
 }
